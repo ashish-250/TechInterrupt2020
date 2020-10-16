@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home Page</title>
+	<link rel="icon" href="images/logo.svg">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			$('input[type=file]').change(function() {
+				var t = $(this).val();
+
+				if(t.length == 0) {
+					return;
+				}
+				var labelText = '<img class="upload_img image-responsive" src="images/upload.svg"><br/>File: ' + t.substr(12, t.length);
+				document.getElementById('labelText').innerHTML = labelText;
+
+				var fr = new FileReader();
+				fr.onload = function() {
+					var seed_content = fr.result;
+					if (seed_content.length == 81 && /^([A-Z9]+)$/.test(seed_content)) {
+						document.getElementById('file_output').innerHTML = '<b>IOTA seed: </b> <div id="seed">' + fr.result + '</div>';
+					} else {
+						document.getElementById('file_output').innerHTML = "<p style='color:red;'>The provided file does not contain a valid IOTA seed. Please select the correct file.</p>"
+					}
+ 				}
+ 				fr.readAsText(this.files[0]);
+			})
+		});
+
+		function goToMainPage() {
+			var seedElement = document.getElementById("seed");
+			if (seedElement == null) {
+				alert("Please provide a valid IOTA seed to proceed.");
+				return;
+			}
+			var cookieValue = seedElement.innerHTML;
+			document.cookie = "seed=" + cookieValue + "; path=/";
+			location.href = "main.html";
+		}		
+	</script>
+</head>
+<body>
+	<header class="header">
+		<nav class="navbar navbar-style">
+			<div class="container">
+				<ul class="nav navbar-nav navbar-left logo">
+					<li><a href="index.html"> <img class="logo image-responsive" src="images/logo.svg">Electric vehicle Charging Station </a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="https://www.iota.org">Powered by IOTA <img class="logo image-responsive" src="images/iota-logo.svg"></a></li>
+				</ul>
+			</div>
+		</nav>
+
+		<form class="form-signin">
+			<div class="text-center mb-4">
+				<br/><br/>
+
+				<h1>Please provide IOTA seed </h1>
+				<br/><br/>
+				<div class='control-fileupload'>
+					<label for="file"><div id="labelText"><img class="upload_img image-responsive" src="images/upload.svg"><br/>Choose a seed file...</div></label>
+					<input type="file" id="file" accept=".txt,.seed"/>
+				</div>
+				<br/>
+				<div id="file_output"></div>
+				<br/><br/>
+				<a class="btn btn-lg btn-primary" id="power_on_btn" onclick="goToMainPage();">Power On</a><br/
+				</div>
+			</form>
+	</header>
+</body>
+</html>
