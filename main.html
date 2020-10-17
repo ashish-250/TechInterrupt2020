@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home Page</title>
+	<link rel="icon" href="images/logo.svg">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		var iota_seed = getcookie("seed");
+		console.log(iota_seed);
+		if (iota_seed == null || iota_seed.length == 81 && /^([A-Z9]+)$/.test(iota_seed)) {
+			alert("The IOTA seed is either invalid or missing from the page. Please go the home page and provide a valid IOTA seed.");
+		}
+
+		function getcookie(name = '') {
+			// let cookies = document.cookie;
+			let cookies = "seed=GHJLKNHGHNJJJGHJGHGHJKIOGHKKKDFKSJDFKLJSDFKLJSKLDFJKLSDJGKLSDKLGJKLSDGJKLKJHJKHJK";
+			let cookiestore = {};
+
+			cookies = cookies.split(";");
+
+			if (cookies[0] == "" && cookies[0][0] == undefined) {
+				return undefined;
+			}
+
+			cookies.forEach(function(cookie) {
+				cookie = cookie.split(/=(.+)/);
+				if (cookie[0].substr(0,1) == ' ') {
+					cookie[0] = cookie[0].substr(1);
+				}
+				cookiestore[cookie[0]] = cookie[1];
+			});
+
+			return (name !== '' ? cookiestore[name] : cookiestore);
+		}
+
+		var totalSeconds = 0;
+			
+		function startTimer() {
+			console.log('button clicked');
+			setInterval(setTime, 1000);
+		}
+
+		function setTime() {
+			++totalSeconds;
+
+			// Use the timer to raise an alarm at the end of selected timeframe
+			console.log(totalSeconds);
+			var minutesLabel = document.getElementById("minutes");
+			var secondsLabel = document.getElementById("seconds");
+		
+			secondsLabel.innerHTML = pad(totalSeconds %60);
+			minutesLabel.innerHTML = pad(parseInt(totalSeconds /60));
+		}
+
+		function pad(val) {
+			var valString = val +"";
+			if (valString.length <2) {
+				return "0" +valString;
+			} else {
+				return valString;
+			}
+		}
+	</script>
+</head>
+<body>
+	<header class="header">
+		<nav class="navbar navbar-style">
+			<div class="container">
+				<ul class="nav navbar-nav navbar-left logo">
+					<li><a href="index.html"> <img class="logo image-responsive" src="images/logo.svg">Electric vehicle Charging Station </a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="https://www.iota.org">Powered by IOTA <img class="logo image-responsive" src="images/iota-logo.svg"></a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					<br/><br/><br/>
+					<div id="left_panel">
+						<p class="big_text">Charging Station Details:</p>
+						<p class="medium_text">Station Id: #1</p>
+						<p class="medium_text">Location: Gachibowli</p>
+						<p class="medium_text">Current Status: <span class="green">Available</span></p>
+						<!-- <p class="medium_text">Current Status: <span class="red">Out of service</span></p>
+						<p class="medium_text">Current Status: <span class="yellow">Charging</span></p>
+						--> 
+						<br/><br/>
+						<p class="big_text">Vehicle Details:</p>
+						<p class="medium_text">Model: Ford Figo </p>
+						<p class="medium_text">Number Plate: HR 36 AT 2934</p>
+						<p class="medium_text"><a style="color:black" onclick="startTimer()">Charging Time</a>: 00:<span id="minutes">34</span>:<span id="seconds">12</span></p>
+					</div>
+				</div>
+				<div class="col-sm-6 right_panel">
+					<div id="qr_code">
+						<img src="https://api.qrserver.com/v1/create-qr-code/?data='Sorry We are not open right now'" size=300*300 alt="" title="IOTA Address">
+						<h1 style="color: #666699">IOTA Address</h1>
+					</div>
+					<h4>Use your mobile app to start charging</h4>
+				</div>
+			</div>
+			
+		</div>
+	</header>
+</body>
+</html>
