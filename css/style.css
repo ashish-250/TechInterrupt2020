@@ -107,11 +107,13 @@ input[type=file] {
     font-size: 30px;
     font-weight: 700;
     padding-left: 25%;
+    padding-left: 25%;
+    
 }
 
 .medium_text {
     margin: auto 20px auto auto;
-    padding-left: 50%;
+    padding-left: 35%;
     font-size: 20px;
     font-weight: 500;
 }
