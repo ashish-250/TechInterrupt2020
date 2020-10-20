@@ -14,7 +14,7 @@
 	<script type="text/javascript">
 		var iota_seed = getcookie("seed");
 		console.log(iota_seed);
-		if (iota_seed == null || iota_seed.length != 81 || /^([A-Z9]+)$/.test(iota_seed)) {
+		if (iota_seed == null || iota_seed.length != 81 || /^([A-Z9]+)$/.test(iota_seed)==false) {
 			alert("The IOTA seed is either invalid or missing from the page. Please go the home page and provide a valid IOTA seed.");
 		}
 
