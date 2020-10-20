@@ -43,6 +43,8 @@
 			}
 			var cookieValue = seedElement.innerHTML;
 			document.cookie = "seed=" + cookieValue + "; path=/";
+			// TODO remove this log statement once finished
+			console.log(document.cookie);
 			location.href = "main.html";
 		}		
 	</script>
