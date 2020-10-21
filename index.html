@@ -26,7 +26,7 @@
 				fr.onload = function() {
 					var seed_content = fr.result;
 					if (seed_content.length == 81 && /^([A-Z9]+)$/.test(seed_content)) {
-						document.getElementById('file_output').innerHTML = '<b>IOTA seed: </b> <div id="seed">' + fr.result + '</div>';
+						document.getElementById('file_output').innerHTML = '<b>IOTA seed: </b> <span id="seed">' + fr.result + '</span>';
 					} else {
 						document.getElementById('file_output').innerHTML = "<p style='color:red;'>The provided file does not contain a valid IOTA seed. Please select the correct file.</p>"
 					}
